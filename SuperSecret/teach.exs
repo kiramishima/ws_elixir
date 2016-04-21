@@ -1,4 +1,4 @@
-defmacro Teach do
+defmodule Teach do
     def explain(subject) do
         IO.puts(subject)
     end
