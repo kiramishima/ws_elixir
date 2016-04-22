@@ -12,4 +12,8 @@ defmodule Birdie do
        |> String.reverse
        |> String.upcase
     end
+    
+    def sing(song) do
+       song
+    end
 end
