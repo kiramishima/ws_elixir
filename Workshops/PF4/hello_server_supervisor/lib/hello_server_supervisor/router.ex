@@ -15,4 +15,5 @@ defmodule HelloServerSupervisor.Router do
   get "/", HelloServerSupervisor.Controllers.Main, :index
   get "/index2", HelloServerSupervisor.Controllers.Jsonpages, :index
   get "/me", HelloServerSupervisor.Controllers.Jsonpages, :me
+  get "/me2", HelloServerSupervisor.Controllers.Jsonpages, :me2
 end
