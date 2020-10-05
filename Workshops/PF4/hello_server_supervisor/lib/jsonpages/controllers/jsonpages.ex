@@ -27,25 +27,24 @@ defmodule HelloServerSupervisor.Controllers.Jsonpages do
   end
 
 
-  defimpl Poison.Encoder, for: BSON.ObjectId do
-    def encode(id, options) do
-      BSON.ObjectId.encode!(id)
-      |> Poison.Encoder.encode(options)
-    end
-  end
+
 
   def me2(conn, []) do
     headers = [
       {"content-type", "application/json"}
     ]
-
+    IO.puts "ID is #{inspect headers}\n"
     # result = HelloServerSupervisor.UserQueries.sample_query2()
+    v = BSON.ObjectId.decode!("5f78d94b8d4b52be05feea7e")
+    IO.puts "ID is #{inspect v}\n"
+    # Logger.debug("BSON", v )
     pipeline = [
       %{
         "$match" => %{
-          "_id" => BSON.ObjectId.decode!("5f78d94b8d4b52be05feea7e")
+          "_id" => v
         }
-      }, %{
+      },
+      %{
         "$lookup"=> %{
           "from" => "users_profile",
           "localField" => "_id",
@@ -59,7 +58,7 @@ defmodule HelloServerSupervisor.Controllers.Jsonpages do
         }
       }, %{
         "$project" => %{
-          "user_id" => "$_id",
+          "_id" => "1",
           "profile_id" => "$profile._id",
           "email" => "$email",
           "name" => "$profile.name",
@@ -71,6 +70,9 @@ defmodule HelloServerSupervisor.Controllers.Jsonpages do
       }
     ]
     result = Mongo.aggregate(:mongo, "users", pipeline)
+
+    IO.puts "Result is #{inspect result}\n"
+    Logger.debug("result", result )
     data = Poison.encode!(%{
       "status" => 200,
       "data" => result

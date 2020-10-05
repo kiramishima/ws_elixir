@@ -10,7 +10,6 @@ defmodule HelloServerSupervisor.Application do
     children = [
       # Starts a worker by calling: HelloServerSupervisor.Worker.start_link(arg)
       # {HelloServerSupervisor.Worker, arg}
-      # worker(HelloServerSupervisor.Repo, [])
       worker(Mongo, [[name: :mongo, url: "", pool_size: 2]])
     ]
 
@@ -18,5 +17,11 @@ defmodule HelloServerSupervisor.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: HelloServerSupervisor.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  defimpl Poison.Encoder, for: BSON.ObjectId do
+    def encode(id, options) do
+      BSON.ObjectId.encode!(id) |> Poison.Encoder.encode(options)
+    end
   end
 end
