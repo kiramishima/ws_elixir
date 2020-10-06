@@ -10,7 +10,7 @@ defmodule HelloServerSupervisor.Application do
     children = [
       # Starts a worker by calling: HelloServerSupervisor.Worker.start_link(arg)
       # {HelloServerSupervisor.Worker, arg}
-      worker(Mongo, [[name: :mongo, url: "", pool_size: 2]])
+      worker(Mongo, [[name: :mongo, url: "mongo://localhost", pool_size: 2]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -58,7 +58,7 @@ defmodule HelloServerSupervisor.Controllers.Jsonpages do
         }
       }, %{
         "$project" => %{
-          "_id" => "1",
+          "id" => "$_id",
           "profile_id" => "$profile._id",
           "email" => "$email",
           "name" => "$profile.name",
@@ -69,14 +69,15 @@ defmodule HelloServerSupervisor.Controllers.Jsonpages do
         }
       }
     ]
-    result = Mongo.aggregate(:mongo, "users", pipeline)
+    cursor = Mongo.aggregate(:mongo, "users", pipeline, [allow_disk_use: true, allow_disk_use: true])
+    [head | _ ] = Enum.to_list(cursor)
 
-    IO.puts "Result is #{inspect result}\n"
-    Logger.debug("result", result )
-    data = Poison.encode!(%{
+    IO.puts "Result is #{inspect head}\n"
+    # Logger.info("result", prices )
+    data = %{
       "status" => 200,
-      "data" => result
-    })
+      "data" => head
+    }
     Logger.debug("sample", data )
     # result
     # IO.puts(result)
