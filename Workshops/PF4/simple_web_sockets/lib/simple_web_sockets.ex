@@ -11,11 +11,17 @@ defmodule SimpleWebSockets do
     {:ok, session, state}
   end
 
-  @impl Riverside
+  @impl Riversides
   def handle_message(msg, session, state) do
+    IO.puts msg
     deliver_me(msg)
     {:ok, session, state}
 
+  end
+
+  @impl Riverside
+  def handle_info(into, session, state) do
+    {:ok, session, state}
   end
 
 end
