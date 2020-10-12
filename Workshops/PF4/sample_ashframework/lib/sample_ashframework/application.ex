@@ -9,6 +9,7 @@ defmodule SampleAshframework.Application do
     children = [
       # Starts a worker by calling: SampleAshframework.Worker.start_link(arg)
       # {SampleAshframework.Worker, arg}
+      SampleAshframework.Repo
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

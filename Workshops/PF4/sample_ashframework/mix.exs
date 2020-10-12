@@ -26,7 +26,9 @@ defmodule SampleAshframework.MixProject do
       {:ash_json_api, "~> 0.19.0"},
       {:ecto, "~> 3.5.1"},
       {:jason, "~> 1.2.1"},
-      {:xema, "~> 0.13.1"}
+      {:xema, "~> 0.13.1"},
+      {:myxql, "~> 0.4.0"},
+      {:ecto_sql, "~> 3.5"}
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
     ]

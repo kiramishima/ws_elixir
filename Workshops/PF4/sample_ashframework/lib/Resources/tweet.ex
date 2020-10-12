@@ -1,5 +1,8 @@
 defmodule SampleAshframework.Resources.Tweet do
-  use Ash.Resource
+  use Ash.Resource,
+    extensions: [
+      AshJsonApi.Resource
+    ]
 
   attributes do
     attribute :id, :uuid do

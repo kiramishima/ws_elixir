@@ -2,9 +2,9 @@ use Mix.Config
 
 # Configure your database
 config :phoenix_api, PhoenixApi.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "phoenix_api_dev",
+  username: "root",
+  password: "123456",
+  database: "covinder",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10

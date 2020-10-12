@@ -25,6 +25,9 @@ defmodule PhoenixApiWeb.Router do
   #   pipe_through :api
   # end
 
+  get "/sample", PhoenixApiWeb.SampleController, :show
+  post "/api/v1/sign-up", PhoenixApiWeb.Auth.RegisterController, :register
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
