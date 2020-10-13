@@ -23,6 +23,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :auth, Auth.Guardian,
+  issuer: "Auth",
+  secret_key: "use mix phx.gen.secret",
+  permissions: %{
+    default: [:read_users, :write_users]
+  }
+
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
