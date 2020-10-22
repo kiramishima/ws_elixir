@@ -27,6 +27,7 @@ defmodule PhoenixApiWeb.Router do
 
   get "/sample", PhoenixApiWeb.SampleController, :show
   post "/api/v1/sign-up", PhoenixApiWeb.Auth.RegisterController, :register
+  post "/api/v1/sign-in", PhoenixApiWeb.Auth.LoginController, :login
 
   # Enables LiveDashboard only for development
   #
