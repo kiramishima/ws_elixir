@@ -5,9 +5,10 @@ defmodule PhoenixApiWeb.Auth.LoginController do
   def login(conn, %{"email" => email, "password" => password}) do
     try do
       email_count = Auth.check_if_email_exist(email)
-      if email_count > 0 do
-        jwt = "token :D"
-        conn |> put_status(401) |> json(%{:message => "Ya existe un usuario con el mismo email o username"})
+      user_count = Auth.check_if_user_exist(email, username)
+      if user_count > 0 do
+        {:ok, jwt, _full_claims} = Auth.Guardian.encode_and_sign(user, %{}, permissions: user.permissions)
+        conn |> json(%{:jwt => jwt})
       else
         raise "El email no existe"
       end
